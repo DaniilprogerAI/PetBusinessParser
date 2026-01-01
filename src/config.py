@@ -27,3 +27,30 @@ EMAIL_REGEX = re.compile(
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
 }
+
+# Ключевые слова для классификации ниш [cite: 8-13, 62]
+NICHES_KEYWORDS = {
+    "Veterinary": [
+        "weterynarz", "weterynarii", "klinika weterynaryjna", "lecznica",
+        "przychodnia weterynaryjna", "chirurgia zwierząt", "szczepienia", "veterinary"
+    ],
+    "Pet Shop": [
+        "sklep zoologiczny", "karma dla psa", "akcesoria dla zwierząt",
+        "gryzaki", "legowiska", "akwarystyka", "pet shop", "zoology"
+    ],
+    "Grooming": [
+        "groomer", "strzyżenie psów", "fryzjer dla psów", "kąpiel psa",
+        "pielęgnacja zwierząt", "grooming", "trymowanie"
+    ],
+    "Shelter/Foundation": [
+        "schronisko", "przytulisko", "fundacja dla zwierząt", "adopcja psa",
+        "azyl", "shelter", "stowarzyszenie"
+    ],
+    "Manufacturing": [
+        "producent karmy", "produkcja akcesoriów", "hurtownia zoologiczna",
+        "distribution", "factory", "wytwórnia"
+    ],
+    "Breeder": [
+        "hodowla psów", "hodowla kotów", "szczenięta", "kennel", "breeding"
+    ]
+}

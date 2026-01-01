@@ -1,16 +1,25 @@
-# This is a sample Python script.
+from src.storage import *
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+async def run_parser(urls):
+    exporter = ExcelExporter()
 
+    for url in urls:
+        html = await fetch_html(url)
+        if html:
+            # 1. Ищем email
+            emails = extract_emails(html)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+            # 2. Для каждого email создаем запись
+            for email in emails:
+                # В MVP название компании берем из домена или Title
+                company_name = urlparse(url).netloc
 
+                exporter.add_record(
+                    company=company_name,
+                    email=email,
+                    website=url,
+                    niche="Veterinary",  # Пока заглушка
+                    city="Unknown"  # Пока заглушка
+                )
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    exporter.save()
