@@ -1,0 +1,38 @@
+# requirements.txt
+# Core
+requests==2.31.0
+httpx==0.25.2
+beautifulsoup4==4.12.2
+lxml==5.1.0
+
+# Browser automation (для JS-сайтов)
+playwright==1.40.0
+
+# Excel
+openpyxl==3.1.2
+pandas==2.3.3
+
+# Email валидация
+email-validator==2.1.0
+dnspython==2.4.2
+
+# PDF
+PyPDF2==3.0.1
+
+# Google Maps API
+googlemaps==4.10.0
+
+# Прокси
+requests[socks]==2.31.0
+
+# Utils
+python-dotenv==1.0.0
+fake-useragent==1.4.0
+ratelimit==2.2.1
+tqdm==4.66.1
+
+# GUI
+# tkinter уже в стандартной библиотеке Python
+
+# Database
+# sqlite3 уже в стандартной библиотеке
