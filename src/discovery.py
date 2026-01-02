@@ -24,11 +24,14 @@ class GoogleDiscovery:
             soup = BeautifulSoup(html, 'lxml')
 
             # В Google ссылки на сайты обычно лежат в тегах <div class="yuRUbf"> или <a> внутри h3
-            for link in soup.select('div.yuRUbf a, div.g a'):
-                href = link.get('href')
-                if href and "http" in href and "google.com" not in href:
-                    # Чистим ссылку до главного домена (опционально)
-                    domain = f"{urllib.parse.urlparse(href).scheme}://{urllib.parse.urlparse(href).netloc}"
+            for link in soup.find_all('a', href=True):
+                href = link['href']
+                # Берем ссылки, которые не ведут на сервисы Google
+                if "url?q=" in href:  # Особенности выдачи при некоторых типах запросов
+                    href = href.split("url?q=")[1].split("&")[0]
+
+                if href.startswith("http") and "google.com" not in href:
+                    domain = f"{urlparse(href).scheme}://{urlparse(href).netloc}"
                     all_links.add(domain)
 
         return list(all_links)
