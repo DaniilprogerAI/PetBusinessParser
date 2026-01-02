@@ -2,6 +2,7 @@ from src.storage import *
 from src.scraper import *
 from src.network import *
 from src.classifier import BusinessClassifier
+from src.geo_extractor import GeoExtractor
 
 async def run_parser(urls):
     exporter = ExcelExporter()
@@ -16,6 +17,9 @@ async def run_parser(urls):
 
             niche = b_classifier.classify(html)
 
+            geo = GeoExtractor
+            city = geo.extract_city(html)
+
             # 2. Для каждого email создаем запись
             for email in emails:
                 # В MVP название компании берем из домена или Title
@@ -26,7 +30,7 @@ async def run_parser(urls):
                     email=email,
                     website=url,
                     niche=niche,  # Пока заглушка
-                    city="Unknown"  # Пока заглушка
+                    city=city  # Пока заглушка
                 )
 
     exporter.save()
