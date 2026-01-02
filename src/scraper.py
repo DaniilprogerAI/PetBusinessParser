@@ -29,3 +29,17 @@ def find_contact_links(html: str, base_url: str) -> list:
             contact_links.append(full_url)
 
     return list(set(contact_links))
+
+
+def find_pdf_links(html: str, base_url: str) -> list:
+    """Ищет ссылки на PDF-файлы (прайсы, каталоги)."""
+    soup = BeautifulSoup(html, 'lxml')
+    pdf_links = []
+
+    for a in soup.find_all('a', href=True):
+        href = a['href'].lower()
+        if href.endswith('.pdf'):
+            full_url = urllib.parse.urljoin(base_url, a['href'])
+            pdf_links.append(full_url)
+
+    return list(set(pdf_links))
