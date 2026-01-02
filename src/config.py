@@ -54,3 +54,13 @@ NICHES_KEYWORDS = {
         "hodowla psów", "hodowla kotów", "szczenięta", "kennel", "breeding"
     ]
 }
+
+# Регулярное выражение для польского почтового индекса (напр. 00-001)
+PL_ZIP_REGEX = re.compile(r"(\d{2}-\d{3})")
+
+# Список крупнейших городов Польши для валидации [cite: 5]
+POLISH_CITIES = {
+    "warszawa", "kraków", "krakow", "łódź", "lodz", "wrocław", "wroclaw",
+    "poznań", "poznan", "gdańsk", "gdansk", "szczecin", "bydgoszcz",
+    "lublin", "białystok", "bialystok", "katowice", "gdynia", "częstochowa"
+}
