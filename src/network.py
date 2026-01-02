@@ -1,6 +1,6 @@
 import httpx
 import logging
-from config import *
+from src.config import *
 
 async def fetch_html(url: str, timeout: int = 10) -> str:
     """Загружает HTML содержимое страницы."""

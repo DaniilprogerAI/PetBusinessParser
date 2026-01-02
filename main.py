@@ -1,36 +1,16 @@
-from src.storage import *
-from src.scraper import *
-from src.network import *
-from src.classifier import BusinessClassifier
-from src.geo_extractor import GeoExtractor
+import asyncio
+from src.orchestrator import ParserOrchestrator
 
-async def run_parser(urls):
-    exporter = ExcelExporter()
+if __name__ == "__main__":
+    # Тестовый список сайтов (в реальности будет грузиться из файла или поиска)
+    test_urls = [
+        "https://example-vet-clinic.pl",
+        "https://zoo-shop-warszawa.pl",
+        "https://groomer-krakow.com"
+    ]
 
-    for url in urls:
-        html = await fetch_html(url)
-        if html:
-            # 1. Ищем email
-            emails = extract_emails(html)
+    orchestrator = ParserOrchestrator(test_urls, max_concurrent=5)
 
-            b_classifier = BusinessClassifier()
-
-            niche = b_classifier.classify(html)
-
-            geo = GeoExtractor
-            city = geo.extract_city(html)
-
-            # 2. Для каждого email создаем запись
-            for email in emails:
-                # В MVP название компании берем из домена или Title
-                company_name = urlparse(url).netloc
-
-                exporter.add_record(
-                    company=company_name,
-                    email=email,
-                    website=url,
-                    niche=niche,  # Пока заглушка
-                    city=city  # Пока заглушка
-                )
-
-    exporter.save()
+    print("🚀 Запуск парсера...")
+    asyncio.run(orchestrator.run())
+    print("✅ Работа завершена. Проверьте папку data/results.xlsx")

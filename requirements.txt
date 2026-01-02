@@ -34,6 +34,7 @@ tqdm==4.66.1
 
 # GUI
 # tkinter уже в стандартной библиотеке Python
+customtkinter==5.2.2
 
 # Database
 # sqlite3 уже в стандартной библиотеке
